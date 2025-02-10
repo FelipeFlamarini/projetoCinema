@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import type { Movie } from "@shared/schema";
 import {
   addToWatchlist,
   removeFromWatchlist,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/api-types";
 
 interface WatchlistButtonProps {
-  movie: Movie;
+  movie: any;
   variant?: "default" | "secondary";
 }
 
@@ -57,7 +56,6 @@ export function WatchlistButton({
   return (
     <Button
       variant={variant}
-      size="sm"
       onClick={(e) => {
         e.stopPropagation();
         toggleWatchlist();
