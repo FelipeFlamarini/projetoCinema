@@ -1,9 +1,7 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Bookmark, HomeIcon, Stars } from "lucide-react";
-import { ThemeToggleMenu } from "../theme-menu";
-import Link from "next/link";
+import { Bookmark, HomeIcon } from "lucide-react";
 
 export default function Header() {
   const router = useRouter();
@@ -33,7 +31,6 @@ export default function Header() {
           )}
           <p>{isOnWatchlistPage ? "Home" : "Watchlist"}</p>
         </button>
-        <ThemeToggleMenu />
       </div>
     </header>
   );
