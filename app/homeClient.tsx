@@ -11,7 +11,7 @@ export default function HomeClient() {
   });
 
   return (
-    <div className=" text-white px-10 py-10 p max-w-screen-xl mx-auto">
+    <div className=" text-white px-10 py-10  max-w-screen-xl mx-auto">
       <>
         <h2 className="text-xl font-semibold mb-6 text-white/90">
           Popular Movies

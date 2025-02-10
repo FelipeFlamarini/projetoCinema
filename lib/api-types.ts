@@ -1,14 +1,15 @@
 import { z } from "zod";
-import type { Movie } from "@shared/schema";
 
 export const recommendationsResponseSchema = z.array(z.any());
-export type RecommendationsResponse = z.infer<typeof recommendationsResponseSchema>;
+export type RecommendationsResponse = z.infer<
+  typeof recommendationsResponseSchema
+>;
 
-export async function getRecommendations(query: string): Promise<Movie[]> {
+export async function getRecommendations(query: string): Promise<any[]> {
   const response = await fetch("/api/recommend", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query })
+    body: JSON.stringify({ query }),
   });
 
   if (!response.ok) {
@@ -19,18 +20,20 @@ export async function getRecommendations(query: string): Promise<Movie[]> {
 }
 
 // Local Storage Keys
-const WATCHLIST_KEY = 'movieai_watchlist';
-const SEARCHES_KEY = 'movieai_searches';
+const WATCHLIST_KEY = "movieai_watchlist";
+const SEARCHES_KEY = "movieai_searches";
 
 // Watchlist Functions
-export function addToWatchlist(movie: Movie): void {
+export function addToWatchlist(movie: any): void {
   const watchlist = getWatchlist();
-  if (!watchlist.some(item => item.movieId === movie.id)) {
+  if (
+    !watchlist.some((item: { movieId: number }) => item.movieId === movie.id)
+  ) {
     watchlist.push({
       id: Date.now(),
       movieId: movie.id,
       movieData: movie,
-      addedAt: new Date().toISOString()
+      addedAt: new Date().toISOString(),
     });
     localStorage.setItem(WATCHLIST_KEY, JSON.stringify(watchlist));
   }
@@ -38,7 +41,9 @@ export function addToWatchlist(movie: Movie): void {
 
 export function removeFromWatchlist(movieId: number): void {
   const watchlist = getWatchlist();
-  const filtered = watchlist.filter(item => item.movieId !== movieId);
+  const filtered = watchlist.filter(
+    (item: { movieId: number }) => item.movieId !== movieId
+  );
   localStorage.setItem(WATCHLIST_KEY, JSON.stringify(filtered));
 }
 
@@ -49,17 +54,19 @@ export function getWatchlist() {
 
 export function isInWatchlist(movieId: number): boolean {
   const watchlist = getWatchlist();
-  return watchlist.some(item => item.movieId === movieId);
+  return watchlist.some(
+    (item: { movieId: number }) => item.movieId === movieId
+  );
 }
 
 // Search History Functions
-export function saveSearch(query: string, recommendations: Movie[]): void {
+export function saveSearch(query: string, recommendations: any[]): void {
   const searches = getSearches();
   searches.unshift({
     id: Date.now(),
     query,
     recommendations,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 
   // Keep only last 5 searches
