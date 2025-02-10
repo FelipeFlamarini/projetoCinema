@@ -11,7 +11,7 @@ export default function HomeClient() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white px-10">
+    <div className=" text-white px-10 py-10 p max-w-screen-xl mx-auto">
       <>
         <h2 className="text-xl font-semibold mb-6 text-white/90">
           Popular Movies
@@ -21,10 +21,12 @@ export default function HomeClient() {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {popularMovies?.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+              {popularMovies?.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>
           </div>
         )}
       </>
