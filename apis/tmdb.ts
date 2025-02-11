@@ -11,6 +11,11 @@ const tmdb = axios.create({
   },
 });
 
+tmdb.interceptors.request.use(request => {
+  console.log(`Request URL: ${request.baseURL}${request.url}`);
+  return request;
+});
+
 export async function searchMovie(title: string) {
   try {
     const response = await tmdb.get("/search/movie", {
@@ -42,7 +47,11 @@ export async function searchMovie(title: string) {
 
 export async function getPopularMovies() {
   try {
-    const response = await tmdb.get("/movie/popular");
+    const response = await tmdb.get("/movie/popular", {
+      params: {
+        language: "pt-BR"
+      }
+    });
     const movies = response.data.results;
 
     // Get detailed information for each movie including genres
@@ -64,6 +73,66 @@ export async function getPopularMovies() {
     );
 
     return detailedMovies;
+  } catch (error) {
+    console.error("TMDB API error:", error);
+    return [];
+  }
+}
+
+export type Filter = {
+  genre: string;
+  year: string;
+  rating: [string, string];
+}
+
+export const filterMovies = async (filter: Filter) => {
+  console.log(filter)
+  try {
+    const response = await tmdb.get(`/discover/movie`, {
+      params: {
+        with_genres: filter.genre,
+        primary_release_year: filter.year,
+        "vote_average.gte": filter.rating[0],
+        "vote_average.lte": filter.rating[1],
+      }
+    });
+    // console.log("aaaaa")
+    const movies = response.data.results;
+
+    // Get detailed information for each movie including genres
+    const detailedMovies = await Promise.all(
+      movies.slice(0, 6).map(async (movie: any) => {
+        const details = await tmdb.get(`/movie/${movie.id}`);
+        return {
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          posterPath: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : null,
+          releaseDate: movie.release_date,
+          voteAverage: movie.vote_average,
+          genres: details.data.genres.map((g: any) => g.name),
+        };
+      })
+    );
+
+    return detailedMovies;
+  } catch (error) {
+    console.error("TMDB API error:", error);
+    return [];
+  }
+}
+
+export const getGenres = async () => {
+  try {
+    const response = await tmdb.get(`/genre/movie/list`, {
+      params: {
+        language: "pt-BR"
+      }
+    });
+    console.log("genres")
+    return response.data.genres;
   } catch (error) {
     console.error("TMDB API error:", error);
     return [];
