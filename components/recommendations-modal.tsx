@@ -94,9 +94,6 @@ export default function RecommendationsModal() {
 
   function handleDialog() {
     setIsOpen((prev) => !prev);
-    // if (isOpen) {
-    //   inputRef.current?.focus();
-    // }
   }
 
   return (
@@ -134,6 +131,7 @@ export default function RecommendationsModal() {
               placeholder="Que tipo de filme você quer descobrir?"
               className=""
               ref={inputRef}
+              tabIndex={-1}
             />
             <Button type="submit" disabled={recommendedMovies.isPending}>
               {recommendedMovies.isPending ? (
