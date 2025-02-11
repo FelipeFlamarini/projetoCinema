@@ -33,21 +33,21 @@ export function WatchlistButton({
       if (isInList) {
         removeFromWatchlist(movie.id);
         toast({
-          title: "Removed from watchlist",
-          description: `${movie.title} has been removed from your watchlist.`,
+          title: "Removido da watchlist",
+          description: `${movie.title} foi removido da sua watchlist.`,
         });
       } else {
         addToWatchlist(movie);
         toast({
-          title: "Added to watchlist",
-          description: `${movie.title} has been added to your watchlist.`,
+          title: "Adicionado à watchlist",
+          description: `${movie.title} foi adicionado à watchlist.`,
         });
       }
       setIsInList(!isInList);
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to update watchlist.",
+        title: "Erro",
+        description: "Falha ao atualizar sua watchlist.",
         variant: "destructive",
       });
     } finally {
