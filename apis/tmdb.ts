@@ -12,6 +12,9 @@ const tmdb = axios.create({
     Authorization: `Bearer ${TMDB_API_KEY}`,
     "Content-Type": "application/json",
   },
+  params:{
+    language: "pt-BR"
+  }
 });
 
 tmdb.interceptors.request.use((request) => {
@@ -50,11 +53,7 @@ export async function searchMovie(title: string) {
 
 export async function getPopularMovies() {
   try {
-    const response = await tmdb.get("/movie/popular", {
-      params: {
-        language: "pt-BR",
-      },
-    });
+    const response = await tmdb.get("/movie/popular");
     const movies = response.data.results;
 
     // Get detailed information for each movie including genres
@@ -129,11 +128,7 @@ export const filterMovies = async (filter: Filter) => {
 
 export const getGenres = async () => {
   try {
-    const response = await tmdb.get(`/genre/movie/list`, {
-      params: {
-        language: "pt-BR",
-      },
-    });
+    const response = await tmdb.get(`/genre/movie/list`);
     console.log("genres");
     return response.data.genres;
   } catch (error) {
