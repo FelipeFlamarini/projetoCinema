@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -60,7 +60,7 @@ export function WatchlistButton({
   return (
     <Button
       variant={variant}
-      onClick={(e: Event) => {
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         toggleWatchlist();
       }}

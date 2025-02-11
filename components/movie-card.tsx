@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
@@ -61,7 +61,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             <Button
               variant="secondary"
               className="flex-1 bg-white/10 hover:bg-white/20 text-white"
-              onClick={(e: Event) => {
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation();
                 window.open(
                   `https://www.youtube.com/results?search_query=${encodeURIComponent(
