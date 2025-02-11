@@ -93,9 +93,9 @@ export default function FilmesClient() {
             disabled={isLoading}
           >
             <SelectTrigger className="w-32">
-              <SelectValue placeholder="Notas" />
+              <SelectValue placeholder="Notas"/>
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent >
               <SelectItem value="low">⭐</SelectItem>
               <SelectItem value="medium">⭐⭐</SelectItem>
               <SelectItem value="high">⭐⭐⭐</SelectItem>
@@ -110,7 +110,7 @@ export default function FilmesClient() {
           )}
         </Button>
       </form>
-      <div className="flex justify-center">
+      <div className="">
         {!isLoading && (
           <>
             {data?.length === 0 && (
