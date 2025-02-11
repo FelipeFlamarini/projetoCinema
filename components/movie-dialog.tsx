@@ -8,11 +8,10 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, PlayCircle, Star } from "lucide-react";
-import type { Movie } from "@shared/schema";
 import { WatchlistButton } from "./watchlist-button";
 
 interface MovieDialogProps {
-  movie: Movie;
+  movie: any;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -26,7 +25,7 @@ export function MovieDialog({ movie, open, onOpenChange }: MovieDialogProps) {
             {movie.title}
           </DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 sm:grid-cols-[300px_1fr]">
+        <div className="grid gap-4 sm:grid-cols-[250px_1fr]">
           <AspectRatio ratio={2 / 3}>
             {movie.posterPath ? (
               <img
@@ -45,7 +44,7 @@ export function MovieDialog({ movie, open, onOpenChange }: MovieDialogProps) {
               <div className="flex items-center gap-1 bg-yellow-500/20 px-3 py-1 rounded">
                 <Star className="w-4 h-4 text-yellow-500" />
                 <span className="font-bold text-yellow-500">
-                  {movie.voteAverage.toFixed(1)}
+                  {movie.voteAverage ? movie.voteAverage.toFixed(1) : "N/A"}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-white/60">
@@ -55,7 +54,7 @@ export function MovieDialog({ movie, open, onOpenChange }: MovieDialogProps) {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {movie.genres.map((genre) => (
+              {movie.genres.map((genre: any) => (
                 <Badge
                   key={genre}
                   variant="secondary"

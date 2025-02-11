@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import type { Movie } from "@shared/schema";
 import {
   addToWatchlist,
   removeFromWatchlist,
   isInWatchlist,
 } from "@/lib/api-types";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface WatchlistButtonProps {
-  movie: Movie;
+  movie: any;
   variant?: "default" | "secondary";
 }
 
@@ -21,6 +21,7 @@ export function WatchlistButton({
   const { toast } = useToast();
   const [isInList, setIsInList] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setIsInList(isInWatchlist(movie.id));
@@ -32,32 +33,32 @@ export function WatchlistButton({
       if (isInList) {
         removeFromWatchlist(movie.id);
         toast({
-          title: "Removed from watchlist",
-          description: `${movie.title} has been removed from your watchlist.`,
+          title: "Removido da watchlist",
+          description: `${movie.title} foi removido da sua watchlist.`,
         });
       } else {
         addToWatchlist(movie);
         toast({
-          title: "Added to watchlist",
-          description: `${movie.title} has been added to your watchlist.`,
+          title: "Adicionado à watchlist",
+          description: `${movie.title} foi adicionado à watchlist.`,
         });
       }
       setIsInList(!isInList);
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to update watchlist.",
+        title: "Erro",
+        description: "Falha ao atualizar sua watchlist.",
         variant: "destructive",
       });
     } finally {
       setIsPending(false);
+      queryClient.invalidateQueries("watchlist");
     }
   };
 
   return (
     <Button
       variant={variant}
-      size="sm"
       onClick={(e) => {
         e.stopPropagation();
         toggleWatchlist();
