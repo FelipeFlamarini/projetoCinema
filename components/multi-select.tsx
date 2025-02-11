@@ -47,7 +47,6 @@ export function MultiSelect({
             toast({
               description: "Máximo de 4 categorias selecionadas",
               title: "Limite de categorias atingido",
-              type: "error",
             });
           }}
           commandProps={{
