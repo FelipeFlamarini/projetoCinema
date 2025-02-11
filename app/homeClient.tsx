@@ -14,7 +14,7 @@ export default function HomeClient() {
     <div className=" text-white px-10 py-10  max-w-screen-xl mx-auto">
       <>
         <h2 className="text-xl font-semibold mb-6 text-white/90">
-          Filmes em cartaz
+          Filmes mais populares do momento
         </h2>
         {isLoadingPopular ? (
           <div className="flex items-center justify-center py-12">

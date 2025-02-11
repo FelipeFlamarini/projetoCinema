@@ -53,7 +53,7 @@ export function WatchlistButton({
       });
     } finally {
       setIsPending(false);
-      queryClient.invalidateQueries({ queryKey: "watchlist" });
+      queryClient.invalidateQueries({ queryKey: ["watchlist"] });
     }
   };
 

@@ -13,6 +13,7 @@ export default function WatchlistClient() {
   } = useQuery({
     queryKey: ["watchlist"],
     queryFn: getWatchlist,
+    gcTime: 0,
   });
 
   return (
