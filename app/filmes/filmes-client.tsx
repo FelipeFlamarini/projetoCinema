@@ -110,7 +110,7 @@ export default function FilmesClient() {
           )}
         </Button>
       </form>
-      <div className="">
+      <div className="flex justify-center">
         {!isLoading && (
           <>
             {data?.length === 0 && (

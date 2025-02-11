@@ -33,7 +33,7 @@ function ChatMessage({ message }: ChatMessageProps) {
   }
   if (Array.isArray(message.message)) {
     return (
-      <div className="flex w-full items-start">
+      <div className="flex w-full items-start overflow-x-auto">
         <div className="flex gap-10 bg-gray-300 p-2 py-4 rounded-xl">
           {message.message?.map((movie) => (
             <MovieCard
@@ -106,7 +106,7 @@ export default function RecommendationsModal() {
         <span className="font-bold overflow-hidden whitespace-nowrap transition-all duration-300 max-w-0 group-hover:max-w-xs">
           Recomenções
         </span>
-      </DialogTrigger>{" "}
+      </DialogTrigger>
       <DialogContent className="flex flex-col justify-between h-[80vh] max-w-5xl">
         <DialogHeader className="">
           <DialogTitle>Peça recomendações de filmes</DialogTitle>
@@ -117,7 +117,7 @@ export default function RecommendationsModal() {
         <div className="flex-grow overflow-y-auto scroll-smooth">
           {messages.map((message, index) => (
             <div key={index} className="flex-shrink-0 mb-4">
-              {ChatMessage({ message })}
+              <ChatMessage message={message} />
             </div>
           ))}
           <div ref={messagesEndRef} />
