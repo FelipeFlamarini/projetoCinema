@@ -13,7 +13,7 @@ export function MovieCard({ movie, className }: any) {
   return (
     <>
       <Card
-        className={`bg-background/5 border-0 cursor-pointer transition-transform hover:scale-105 max-w-xs ${className}`}
+        className={`bg-background/5 border-0 cursor-pointer transition-transform hover:scale-105 max-w-xs min-w-64 ${className}`}
         onClick={() => setShowDetails(true)}
       >
         <AspectRatio ratio={2 / 3}>
