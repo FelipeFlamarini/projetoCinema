@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Bookmark, HomeIcon } from "lucide-react";
+import Link from 'next/link'
+import { Bookmark, Filter, HomeIcon } from "lucide-react";
 
 export default function Header() {
   const router = useRouter();
@@ -11,6 +12,11 @@ export default function Header() {
   const handleNavigation = () => {
     router.push(isOnWatchlistPage ? "/" : "/watchlist");
   };
+
+  const handleFilmes = () => {
+    router.push("/filmes");
+  };
+
 
   return (
     <header className="flex items-center justify-between p-4 bg-background text-foreground max-w-screen-xl mx-auto">
@@ -31,6 +37,15 @@ export default function Header() {
           )}
           <p>{isOnWatchlistPage ? "Home" : "Watchlist"}</p>
         </button>
+        <Link href={"/filmes"}>
+        <button
+          onClick={handleFilmes}
+          className="flex items-center gap-2 border-2 border-primary rounded-full px-4 py-2 hover:bg-primary hover:bg-opacity-10 transition-colors hover:text-black w-32 justify-center"
+        >
+          <Filter />
+          <p>{"Filmes"}</p>
+        </button>
+        </Link>
       </div>
     </header>
   );

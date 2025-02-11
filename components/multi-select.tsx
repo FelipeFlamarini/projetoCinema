@@ -39,6 +39,7 @@ export function MultiSelect({ onChange, className,disabled}: MultiSelectProps) {
     <>
       {(!isLoading && genres) && (
         <MultipleSelector
+          maxSelected={4}
           commandProps={{
             label: "Escolha a Categorias",
           }}

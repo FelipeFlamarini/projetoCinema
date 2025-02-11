@@ -95,11 +95,18 @@ export default function Filmes() {
           </Button>
       </form>
       {!isLoading && (
+        <>
+          {
+            data?.length === 0 && (
+              <p className="text-center text-lg">Nenhum Filme Encontrado</p>
+            )
+          }
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data?.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
+        </>
       )}
     </div>
   );
