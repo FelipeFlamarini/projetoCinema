@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import WhatchlistComponent from "../WhatchlistComponent";
+import WatchlistClient from "./WatchlistClient";
 
 export const metadata: Metadata = {
-  title: "Whatchlist",
+  title: "Watchlist",
 };
 
-export default function Whatchlist() {
-  return <WhatchlistComponent />;
+export default function Watchlist() {
+  return <WatchlistClient />;
 }

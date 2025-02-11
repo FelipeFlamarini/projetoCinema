@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "(dev) start container",
+      "type": "shell",
+      "command": "docker run -d -p 3000:3000 --name projeto-cinema projeto-cinema",
+      "problemMatcher": []
+    },
+    {
+      "label": "(dev) stop container",
+      "type": "shell",
+      "command": "docker stop projeto-cinema",
+      "problemMatcher": []
+    },
+    {
+      "label": "(dev) remove container",
+      "type": "shell",
+      "command": "docker rm projeto-cinema",
+      "problemMatcher": []
+    },
+    {
+      "label": "(dev) build image",
+      "type": "shell",
+      "command": "docker build -t projeto-cinema .",
+      "problemMatcher": []
+    }
+  ]
+}

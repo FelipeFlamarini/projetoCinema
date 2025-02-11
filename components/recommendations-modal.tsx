@@ -30,7 +30,7 @@ function ChatMessage({ message }: { message: ChatMessages }) {
   if (Array.isArray(message.message)) {
     return (
       <div className="flex w-full items-start">
-        <div className="flex gap-10 bg-gray-300 p-2 rounded-xl">
+        <div className="flex gap-10 bg-gray-300 p-2 py-4 rounded-xl">
           {message.message?.map((movie) => (
             <MovieCard
               key={movie.id}

@@ -4,7 +4,7 @@ import { MovieCard } from "@/components/movie-card";
 import { Loader2 } from "lucide-react";
 import { getWatchlist } from "@/lib/api-types";
 
-export default function WatchlistComponent() {
+export default function WatchlistClient() {
   const {
     data: watchList,
     isLoading,
@@ -36,7 +36,7 @@ export default function WatchlistComponent() {
               ))}
 
             {watchList?.length === 0 && (
-              <div className="flex items-center justify-center text-center">
+              <div className="col-span-3 text-center">
                 Não há filmes na sua watchlist. Que tal pesquisar e adicionar
                 alguns?
               </div>
