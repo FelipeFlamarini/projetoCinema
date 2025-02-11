@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       {/* supressHydrationWarning won't affect hydration on other components, only on ThemeProvider */}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-h-screen max-w-screen-xl mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-h-screen mx-auto`}
       >
         <QueryClientProvider client={queryClient}>
           <Toaster />
