@@ -94,9 +94,9 @@ export default function RecommendationsModal() {
 
   function handleDialog() {
     setIsOpen((prev) => !prev);
-    if (isOpen) {
-      inputRef.current?.focus();
-    }
+    // if (isOpen) {
+    //   inputRef.current?.focus();
+    // }
   }
 
   return (
