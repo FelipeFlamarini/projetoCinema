@@ -1,3 +1,5 @@
+"use server";
+
 import { getMovieRecommendations } from "./gemini";
 import { searchMovie } from "./tmdb";
 

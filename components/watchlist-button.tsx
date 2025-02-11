@@ -7,6 +7,7 @@ import {
   removeFromWatchlist,
   isInWatchlist,
 } from "@/lib/api-types";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface WatchlistButtonProps {
   movie: any;
@@ -20,6 +21,7 @@ export function WatchlistButton({
   const { toast } = useToast();
   const [isInList, setIsInList] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setIsInList(isInWatchlist(movie.id));
@@ -50,6 +52,7 @@ export function WatchlistButton({
       });
     } finally {
       setIsPending(false);
+      queryClient.invalidateQueries("watchlist");
     }
   };
 
