@@ -2,6 +2,11 @@
 
 O objetivo deste projeto é fornecer informações sobre filmes, como sinopse, gêneros, ano de lançamento, entre outros. Para isso, foi utilizado a API [The Movie Database](https://www.themoviedb.org/). Também é possível receber recomendações de filmes utilizando inteligência artificial, utilizando a API do [Gemini](https://ai.google.dev).
 
+## Autores
+- [Felipe Flamarini](https://github.com/FelipeFlamarini)
+- [Kauan Olival](https://github.com/kauan345developer)
+- [Pedro Samuel](https://github.com/PsSave)
+
 ## Executando
 
 ### Pré-requisitos
