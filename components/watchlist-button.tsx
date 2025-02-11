@@ -8,9 +8,10 @@ import {
   isInWatchlist,
 } from "@/lib/api-types";
 import { useQueryClient } from "@tanstack/react-query";
+import type { Movie } from "@/lib/interfaces";
 
 interface WatchlistButtonProps {
-  movie: any;
+  movie: Movie;
   variant?: "default" | "secondary";
 }
 
@@ -52,14 +53,14 @@ export function WatchlistButton({
       });
     } finally {
       setIsPending(false);
-      queryClient.invalidateQueries("watchlist");
+      queryClient.invalidateQueries({ queryKey: "watchlist" });
     }
   };
 
   return (
     <Button
       variant={variant}
-      onClick={(e) => {
+      onClick={(e: Event) => {
         e.stopPropagation();
         toggleWatchlist();
       }}

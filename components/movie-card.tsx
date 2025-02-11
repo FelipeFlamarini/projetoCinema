@@ -6,8 +6,14 @@ import { Clock, PlayCircle } from "lucide-react";
 import { MovieDialog } from "./movie-dialog";
 import { WatchlistButton } from "./watchlist-button";
 import Image from "next/image";
+import type { Movie } from "@/lib/interfaces";
 
-export function MovieCard({ movie, className }: any) {
+interface MovieCardProps {
+  movie: Movie;
+  className?: string;
+}
+
+export function MovieCard({ movie, className }: MovieCardProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -17,9 +23,9 @@ export function MovieCard({ movie, className }: any) {
         onClick={() => setShowDetails(true)}
       >
         <AspectRatio ratio={2 / 3}>
-          {movie.posterPath ? (
+          {movie.poster_path ? (
             <Image
-              src={movie.posterPath}
+              src={movie.poster_path}
               alt={movie.title}
               width={500}
               height={750}
@@ -36,10 +42,10 @@ export function MovieCard({ movie, className }: any) {
             <h3 className="font-semibold text-xl text-white truncate max-w-full">
               {movie.title}
             </h3>
-            {movie.voteAverage !== undefined && (
+            {movie.vote_average !== undefined && (
               <div className="flex items-center bg-yellow-500/20 px-2 py-1 rounded">
                 <span className="text-yellow-500 font-bold">
-                  {movie.voteAverage.toFixed(1)}
+                  {movie.vote_average.toFixed(1)}
                 </span>
               </div>
             )}
@@ -47,7 +53,7 @@ export function MovieCard({ movie, className }: any) {
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
-            <span>{new Date(movie.releaseDate).getFullYear()}</span>
+            <span>{new Date(movie.release_date).getFullYear()}</span>
           </div>
 
           <div className="flex gap-2 flex-col">
@@ -55,7 +61,7 @@ export function MovieCard({ movie, className }: any) {
             <Button
               variant="secondary"
               className="flex-1 bg-white/10 hover:bg-white/20 text-white"
-              onClick={(e) => {
+              onClick={(e: Event) => {
                 e.stopPropagation();
                 window.open(
                   `https://www.youtube.com/results?search_query=${encodeURIComponent(

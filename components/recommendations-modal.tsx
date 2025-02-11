@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, use } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Sparkle, Send, LoaderCircle } from "lucide-react";
 
 import { MovieCard } from "./movie-card";
@@ -13,16 +13,20 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChatMessages } from "@/lib/interfaces";
 import { useRecommendedMovies } from "@/hooks/use-recommended-movies";
+import type { Movie } from "@/lib/interfaces";
 
-function ChatMessage({ message }: { message: ChatMessages }) {
+interface ChatMessageProps {
+  message: ChatMessages;
+}
+
+function ChatMessage({ message }: ChatMessageProps) {
   if (message.sender) {
     return (
       <div className="flex flex-col w-full items-end">
         <div className="bg-blue-500 text-white p-2 m-1 rounded-lg max-w-xs">
-          {message.message}
+          {message.message as string}
         </div>
       </div>
     );
@@ -53,7 +57,7 @@ function ChatMessage({ message }: { message: ChatMessages }) {
 
 export default function RecommendationsModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessages>([]);
+  const [messages, setMessages] = useState<ChatMessages[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recommendedMovies = useRecommendedMovies();
@@ -69,7 +73,6 @@ export default function RecommendationsModal() {
     setMessages((prev) => [...prev, { sender: true, message }]);
     recommendedMovies.mutate(message, {
       onSuccess: (data) => {
-        console.log(data);
         handleReceiveMessage(data);
       },
       onError: (error) => {
@@ -85,7 +88,7 @@ export default function RecommendationsModal() {
     });
   }
 
-  function handleReceiveMessage(message: string | Array<any>) {
+  function handleReceiveMessage(message: string | Movie[]) {
     setMessages((prev) => [...prev, { sender: false, message }]);
   }
 

@@ -3,7 +3,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import "@/lib/envConfig";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? "";
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 export async function getMovieRecommendations(

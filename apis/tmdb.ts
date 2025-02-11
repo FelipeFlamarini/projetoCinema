@@ -1,6 +1,7 @@
 "use server";
 
 import axios from "axios";
+import type { Movie, MovieGenre } from "@/lib/interfaces";
 
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -34,12 +35,12 @@ export async function searchMovie(title: string) {
       id: movie.id,
       title: movie.title,
       overview: movie.overview,
-      posterPath: movie.poster_path
+      poster_path: movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : null,
-      releaseDate: movie.release_date,
-      voteAverage: movie.vote_average,
-      genres: details.data.genres.map((g: any) => g.name),
+      release_date: movie.release_date,
+      vote_average: movie.vote_average,
+      genres: details.data.genres.map((g: MovieGenre) => g.name),
     };
   } catch (error) {
     console.error("TMDB API error:", error);
@@ -58,18 +59,18 @@ export async function getPopularMovies() {
 
     // Get detailed information for each movie including genres
     const detailedMovies = await Promise.all(
-      movies.slice(0, 8).map(async (movie: any) => {
+      movies.slice(0, 8).map(async (movie: Movie) => {
         const details = await tmdb.get(`/movie/${movie.id}`);
         return {
           id: movie.id,
           title: movie.title,
           overview: movie.overview,
-          posterPath: movie.poster_path
+          poster_path: movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : null,
-          releaseDate: movie.release_date,
-          voteAverage: movie.vote_average,
-          genres: details.data.genres.map((g: any) => g.name),
+          release_date: movie.release_date,
+          vote_average: movie.vote_average,
+          genres: details.data.genres.map((g: MovieGenre) => g.name),
         };
       })
     );
@@ -103,18 +104,18 @@ export const filterMovies = async (filter: Filter) => {
 
     // Get detailed information for each movie including genres
     const detailedMovies = await Promise.all(
-      movies.slice(0, 8).map(async (movie: any) => {
+      movies.slice(0, 8).map(async (movie: Movie) => {
         const details = await tmdb.get(`/movie/${movie.id}`);
         return {
           id: movie.id,
           title: movie.title,
           overview: movie.overview,
-          posterPath: movie.poster_path
+          poster_path: movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : null,
-          releaseDate: movie.release_date,
-          voteAverage: movie.vote_average,
-          genres: details.data.genres.map((g: any) => g.name),
+          release_date: movie.release_date,
+          vote_average: movie.vote_average,
+          genres: details.data.genres.map((g: MovieGenre) => g.name),
         };
       })
     );

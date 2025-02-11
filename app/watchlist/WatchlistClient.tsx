@@ -3,13 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { MovieCard } from "@/components/movie-card";
 import { Loader2 } from "lucide-react";
 import { getWatchlist } from "@/lib/api-types";
+import type { WatchlistMovie } from "@/lib/interfaces";
 
 export default function WatchlistClient() {
   const {
     data: watchList,
     isLoading,
     isError,
-  } = useQuery<any[]>({
+  } = useQuery({
     queryKey: ["watchlist"],
     queryFn: getWatchlist,
   });
@@ -31,7 +32,7 @@ export default function WatchlistClient() {
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
             {watchList &&
-              watchList?.map((movieList) => (
+              watchList?.map((movieList: WatchlistMovie) => (
                 <MovieCard key={movieList.id} movie={movieList.movieData} />
               ))}
 

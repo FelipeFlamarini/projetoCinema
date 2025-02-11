@@ -3,7 +3,7 @@
 import { getMovieRecommendations } from "./gemini";
 import { searchMovie } from "./tmdb";
 
-export const searchGeminiMovies = async (query) => {
+export const searchGeminiMovies = async (query: string) => {
   const titles = await getMovieRecommendations(query).catch((error) => {
     console.error("Gemini API error:", error);
     throw new Error("Failed to get movie recommendations from AI");

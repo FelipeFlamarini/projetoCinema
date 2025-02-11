@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import { getPopularMovies } from "@/apis/tmdb";
 
 export default function HomeClient() {
-  const { data: popularMovies, isLoading: isLoadingPopular } = useQuery<any[]>({
+  const { data: popularMovies, isLoading: isLoadingPopular } = useQuery({
     queryKey: ["popularMovies"],
     queryFn: getPopularMovies,
   });

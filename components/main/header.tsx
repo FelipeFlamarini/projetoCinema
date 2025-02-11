@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Bookmark, Filter, HomeIcon } from "lucide-react";
+import { Bookmark, Filter } from "lucide-react";
 
 export default function Header() {
   const router = useRouter();
-  const pathname = usePathname();
-  const isOnWatchlistPage = pathname === "/watchlist";
 
   const handleNavigation = () => {
     router.push("/watchlist");

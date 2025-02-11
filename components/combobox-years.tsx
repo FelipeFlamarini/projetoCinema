@@ -10,15 +10,21 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Check, ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 
-const anos = Array.from({ length: new Date().getFullYear() - 1899 }, (_, i) => ({
-  value: (1900 + i).toString(),
-  label: (1900 + i).toString()
-})).reverse();
+const anos = Array.from(
+  { length: new Date().getFullYear() - 1899 },
+  (_, i) => ({
+    value: (1900 + i).toString(),
+    label: (1900 + i).toString(),
+  })
+).reverse();
 
 interface ComboboxYearsProps {
   onChange: (value: string) => void;
@@ -26,7 +32,11 @@ interface ComboboxYearsProps {
   disabled?: boolean;
 }
 
-export  function ComboboxYears( { onChange, className, disabled }: ComboboxYearsProps) {
+export function ComboboxYears({
+  onChange,
+  className,
+  disabled,
+}: ComboboxYearsProps) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
@@ -40,7 +50,10 @@ export  function ComboboxYears( { onChange, className, disabled }: ComboboxYears
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className={cn("w-full justify-between bg-background px-3 font-normal outline-offset-0 hover:bg-background focus-visible:border-ring focus-visible:outline-[3px] focus-visible:outline-ring/20",className)}
+            className={cn(
+              "w-full justify-between bg-background px-3 font-normal outline-offset-0 hover:bg-background focus-visible:border-ring focus-visible:outline-[3px] focus-visible:outline-ring/20",
+              className
+            )}
             disabled={disabled}
           >
             <span className={cn("truncate", !value && "text-muted-foreground")}>
@@ -87,7 +100,6 @@ export  function ComboboxYears( { onChange, className, disabled }: ComboboxYears
           </Command>
         </PopoverContent>
       </Popover>
-      
     </>
   );
 }

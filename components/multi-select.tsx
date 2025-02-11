@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import MultipleSelector, { Option } from "@/components/ui/multiselect";
 import { useGetGenres } from "@/hooks/use-genres";
 // import { Input } from "postcss";

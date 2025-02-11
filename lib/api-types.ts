@@ -1,30 +1,32 @@
 import { z } from "zod";
 
+import type { Movie } from "./interfaces";
+
 export const recommendationsResponseSchema = z.array(z.any());
 export type RecommendationsResponse = z.infer<
   typeof recommendationsResponseSchema
 >;
 
-export async function getRecommendations(query: string): Promise<any[]> {
-  const response = await fetch("/api/recommend", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
-  });
+// export async function getRecommendations(query: string): Promise {
+//   const response = await fetch("/api/recommend", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ query }),
+//   });
 
-  if (!response.ok) {
-    throw new Error("Failed to get recommendations");
-  }
+//   if (!response.ok) {
+//     throw new Error("Failed to get recommendations");
+//   }
 
-  return response.json();
-}
+//   return response.json();
+// }
 
 // Local Storage Keys
 const WATCHLIST_KEY = "movieai_watchlist";
 const SEARCHES_KEY = "movieai_searches";
 
 // Watchlist Functions
-export function addToWatchlist(movie: any): void {
+export function addToWatchlist(movie: Movie): void {
   const watchlist = getWatchlist();
   if (
     !watchlist.some((item: { movieId: number }) => item.movieId === movie.id)
@@ -60,19 +62,19 @@ export function isInWatchlist(movieId: number): boolean {
 }
 
 // Search History Functions
-export function saveSearch(query: string, recommendations: any[]): void {
-  const searches = getSearches();
-  searches.unshift({
-    id: Date.now(),
-    query,
-    recommendations,
-    timestamp: new Date().toISOString(),
-  });
+// export function saveSearch(query: string, recommendations): void {
+//   const searches = getSearches();
+//   searches.unshift({
+//     id: Date.now(),
+//     query,
+//     recommendations,
+//     timestamp: new Date().toISOString(),
+//   });
 
-  // Keep only last 5 searches
-  const recentSearches = searches.slice(0, 5);
-  localStorage.setItem(SEARCHES_KEY, JSON.stringify(recentSearches));
-}
+//   // Keep only last 5 searches
+//   const recentSearches = searches.slice(0, 5);
+//   localStorage.setItem(SEARCHES_KEY, JSON.stringify(recentSearches));
+// }
 
 export function getSearches() {
   const data = localStorage.getItem(SEARCHES_KEY);
