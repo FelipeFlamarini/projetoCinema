@@ -29,7 +29,7 @@ export default function WatchlistClient() {
         </p>
       ) : (
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
             {watchList &&
               watchList?.map((movieList) => (
                 <MovieCard key={movieList.id} movie={movieList.movieData} />

@@ -13,7 +13,7 @@ const tmdb = axios.create({
   },
 });
 
-tmdb.interceptors.request.use(request => {
+tmdb.interceptors.request.use((request) => {
   console.log(`Request URL: ${request.baseURL}${request.url}`);
   return request;
 });
@@ -51,14 +51,14 @@ export async function getPopularMovies() {
   try {
     const response = await tmdb.get("/movie/popular", {
       params: {
-        language: "pt-BR"
-      }
+        language: "pt-BR",
+      },
     });
     const movies = response.data.results;
 
     // Get detailed information for each movie including genres
     const detailedMovies = await Promise.all(
-      movies.slice(0, 6).map(async (movie: any) => {
+      movies.slice(0, 8).map(async (movie: any) => {
         const details = await tmdb.get(`/movie/${movie.id}`);
         return {
           id: movie.id,
@@ -85,10 +85,10 @@ export type Filter = {
   genre: string;
   year: string;
   rating: [string, string];
-}
+};
 
 export const filterMovies = async (filter: Filter) => {
-  console.log(filter)
+  console.log(filter);
   try {
     const response = await tmdb.get(`/discover/movie`, {
       params: {
@@ -96,14 +96,14 @@ export const filterMovies = async (filter: Filter) => {
         primary_release_year: filter.year,
         "vote_average.gte": filter.rating[0],
         "vote_average.lte": filter.rating[1],
-      }
+      },
     });
     // console.log("aaaaa")
     const movies = response.data.results;
 
     // Get detailed information for each movie including genres
     const detailedMovies = await Promise.all(
-      movies.slice(0, 6).map(async (movie: any) => {
+      movies.slice(0, 8).map(async (movie: any) => {
         const details = await tmdb.get(`/movie/${movie.id}`);
         return {
           id: movie.id,
@@ -124,19 +124,19 @@ export const filterMovies = async (filter: Filter) => {
     console.error("TMDB API error:", error);
     return [];
   }
-}
+};
 
 export const getGenres = async () => {
   try {
     const response = await tmdb.get(`/genre/movie/list`, {
       params: {
-        language: "pt-BR"
-      }
+        language: "pt-BR",
+      },
     });
-    console.log("genres")
+    console.log("genres");
     return response.data.genres;
   } catch (error) {
     console.error("TMDB API error:", error);
     return [];
   }
-}
+};

@@ -14,7 +14,7 @@ export default function HomeClient() {
     <div className=" text-white px-10 py-10  max-w-screen-xl mx-auto">
       <>
         <h2 className="text-xl font-semibold mb-6 text-white/90">
-          Popular Movies
+          Filmes em cartaz
         </h2>
         {isLoadingPopular ? (
           <div className="flex items-center justify-center py-12">
@@ -22,7 +22,7 @@ export default function HomeClient() {
           </div>
         ) : (
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
               {popularMovies?.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
