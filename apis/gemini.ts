@@ -20,11 +20,11 @@ Rules:
 - Use official movie titles
 - Only return the array, no explanations
 - Make sure it's valid JSON
+- Never use markdown notation
 
 Example response:
 ["The Dark Knight", "Inception", "Interstellar"]`;
 
-    console.log("oi")
     const result = await model.generateContent(prompt);
     const response = result.response.text();
 
