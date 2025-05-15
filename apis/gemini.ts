@@ -6,7 +6,7 @@ import "@/lib/envConfig";
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? "";
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 export async function getMovieRecommendations(
   query: string
@@ -24,6 +24,7 @@ Rules:
 Example response:
 ["The Dark Knight", "Inception", "Interstellar"]`;
 
+    console.log("oi")
     const result = await model.generateContent(prompt);
     const response = result.response.text();
 
